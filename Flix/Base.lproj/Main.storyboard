@@ -74,17 +74,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bpS-Vu-Zkc">
+                                <rect key="frame" x="169" y="388" width="37" height="37"/>
+                                <color key="color" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="bpS-Vu-Zkc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="309-N7-PiX"/>
                             <constraint firstItem="C8C-w3-E8q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BL8-8w-WGE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C8C-w3-E8q" secondAttribute="trailing" id="Y8m-U0-yDG"/>
                             <constraint firstItem="C8C-w3-E8q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aAv-4Z-yqx"/>
+                            <constraint firstItem="bpS-Vu-Zkc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rbl-py-MI5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C8C-w3-E8q" secondAttribute="bottom" id="tnU-nE-OrB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="bpS-Vu-Zkc" id="Rzs-op-KOL"/>
                         <outlet property="tableView" destination="C8C-w3-E8q" id="J14-eo-Kp7"/>
                     </connections>
                 </viewController>

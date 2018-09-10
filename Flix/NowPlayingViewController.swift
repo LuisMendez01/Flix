@@ -12,14 +12,37 @@ import AlamofireImage
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movies: [[String: Any]] = []
+    var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.rowHeight = 200
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
+        
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        self.activityIndicator.startAnimating()//start the indicator before reloading data
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+            // Your code with delay
+            self.fetchNowPlayingMovies()//get now playing movies from the APIs
+        }
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchNowPlayingMovies() {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -47,16 +70,21 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
                 }
                 
                 self.tableView.reloadData()//reload table after all movies are input in movies array
+                self.refreshControl.endRefreshing()//stop refresh when data has been acquired
+                self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
             }
         }
         task.resume()
 
-        // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        self.activityIndicator.startAnimating()//start the indicator before reloading data
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+            // Your code with delay
+            self.fetchNowPlayingMovies()//get now playing movies from the APIs
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
