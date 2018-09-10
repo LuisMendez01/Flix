@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
 
@@ -18,7 +19,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         tableView.dataSource = self
-        tableView.rowHeight = 220
+        tableView.rowHeight = 200
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -68,6 +69,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
         
         cell.titleLabel.text = movies[indexPath.row]["title"] as? String
         cell.overviewLabel.text = movies[indexPath.row]["overview"] as? String
+        
+        let posterPathString = movies[indexPath.row]["poster_path"] as! String
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        
+        let posterURL = URL(string: baseURLString + posterPathString)!
+        cell.posterImageView.af_setImage(withURL: posterURL)
         
         return cell
     }

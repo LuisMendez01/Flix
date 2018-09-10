@@ -23,52 +23,52 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="220" id="OX2-Ga-qrc" customClass="MovieViewCell" customModule="Flix" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="220"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="200" id="OX2-Ga-qrc" customClass="MovieViewCell" customModule="Flix" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OX2-Ga-qrc" id="J5j-ZP-Pn4">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oxz-GI-CxZ">
-                                                    <rect key="frame" x="5" y="10" width="100" height="199"/>
+                                                    <rect key="frame" x="5" y="10" width="120" height="180"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="IrC-ot-ToE"/>
+                                                        <constraint firstAttribute="width" constant="120" id="zxX-40-yMe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHf-M3-WnI">
-                                                    <rect key="frame" x="113" y="44.333333333333343" width="250" height="165"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="250" id="Kq0-FP-ZiT"/>
-                                                        <constraint firstAttribute="height" constant="165" id="cbb-Ix-p3c"/>
-                                                    </constraints>
-                                                    <string key="text">As Scott Lang awaits expiration of his term of house detention, Hope van Dyne and Dr. Hank Pym involve him in a scheme to rescue Mrs. van Dyne from the micro-universe into which she has fallen, while two groups of schemers converge on them with intentions of stealing Dr. Pym's inventions.</string>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ant-Man and the Wasp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMI-x1-ylC">
-                                                    <rect key="frame" x="113" y="10.999999999999998" width="250" height="25.333333333333329"/>
+                                                    <rect key="frame" x="133" y="10" width="232" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="250" id="3pu-Ux-Qvd"/>
+                                                        <constraint firstAttribute="height" constant="25" id="67V-zW-oDn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHf-M3-WnI">
+                                                    <rect key="frame" x="133" y="43" width="217" height="140"/>
+                                                    <string key="text">As Scott Lang awaits expiration of his term of house detention, Hope van Dyne and Dr. Hank Pym involve him in a scheme to rescue Mrs. van Dyne from the micro-universe into which she has fallen, while two groups of schemers converge on them with intentions of stealing Dr. Pym's inventions.</string>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="topMargin" id="8RJ-a7-JF3"/>
-                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="top" secondItem="wMI-x1-ylC" secondAttribute="bottom" constant="8" id="JdR-HA-S1p"/>
-                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="P46-19-qIc"/>
-                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="5" id="dEK-Wx-cXz"/>
-                                                <constraint firstAttribute="bottom" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="10" id="jt8-Jr-9Ks"/>
-                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="mfX-K3-dXc"/>
-                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="rOo-O8-c69"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="6ho-wI-1H5"/>
+                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="984-Bt-G96"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="5" id="E9h-Ns-1hY"/>
+                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="HVS-wx-kZP"/>
+                                                <constraint firstAttribute="bottom" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="9.6699999999999999" id="L0Q-WH-CFI"/>
+                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="top" secondItem="wMI-x1-ylC" secondAttribute="bottom" constant="8" id="PCE-pf-G3e"/>
+                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="dBc-WL-XKq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CHf-M3-WnI" secondAttribute="bottom" constant="6" id="f6f-zr-ZAO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="CHf-M3-WnI" secondAttribute="trailing" constant="10" id="jCR-tf-lvO"/>
+                                                <constraint firstAttribute="trailing" secondItem="wMI-x1-ylC" secondAttribute="trailing" constant="10" id="sBz-GE-wYH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="overviewLabel" destination="CHf-M3-WnI" id="sBf-Bf-sdq"/>
+                                            <outlet property="posterImageView" destination="oxz-GI-CxZ" id="2W7-01-3mB"/>
                                             <outlet property="titleLabel" destination="wMI-x1-ylC" id="ALR-Fe-tJs"/>
                                         </connections>
                                     </tableViewCell>
