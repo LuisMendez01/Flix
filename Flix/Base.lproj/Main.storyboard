@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,12 +18,79 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C8C-w3-E8q">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="220" id="OX2-Ga-qrc" customClass="MovieViewCell" customModule="Flix" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="220"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OX2-Ga-qrc" id="J5j-ZP-Pn4">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="219.66666666666666"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oxz-GI-CxZ">
+                                                    <rect key="frame" x="5" y="10" width="100" height="199"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="IrC-ot-ToE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHf-M3-WnI">
+                                                    <rect key="frame" x="113" y="44.333333333333343" width="250" height="165"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="Kq0-FP-ZiT"/>
+                                                        <constraint firstAttribute="height" constant="165" id="cbb-Ix-p3c"/>
+                                                    </constraints>
+                                                    <string key="text">As Scott Lang awaits expiration of his term of house detention, Hope van Dyne and Dr. Hank Pym involve him in a scheme to rescue Mrs. van Dyne from the micro-universe into which she has fallen, while two groups of schemers converge on them with intentions of stealing Dr. Pym's inventions.</string>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ant-Man and the Wasp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMI-x1-ylC">
+                                                    <rect key="frame" x="113" y="10.999999999999998" width="250" height="25.333333333333329"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="3pu-Ux-Qvd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="topMargin" id="8RJ-a7-JF3"/>
+                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="top" secondItem="wMI-x1-ylC" secondAttribute="bottom" constant="8" id="JdR-HA-S1p"/>
+                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="P46-19-qIc"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="5" id="dEK-Wx-cXz"/>
+                                                <constraint firstAttribute="bottom" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="10" id="jt8-Jr-9Ks"/>
+                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="mfX-K3-dXc"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="rOo-O8-c69"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="overviewLabel" destination="CHf-M3-WnI" id="sBf-Bf-sdq"/>
+                                            <outlet property="titleLabel" destination="wMI-x1-ylC" id="ALR-Fe-tJs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="C8C-w3-E8q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="BL8-8w-WGE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C8C-w3-E8q" secondAttribute="trailing" id="Y8m-U0-yDG"/>
+                            <constraint firstItem="C8C-w3-E8q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aAv-4Z-yqx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C8C-w3-E8q" secondAttribute="bottom" id="tnU-nE-OrB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="C8C-w3-E8q" id="J14-eo-Kp7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="35.467980295566505"/>
         </scene>
     </scenes>
 </document>
