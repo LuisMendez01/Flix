@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */; };
 		F75945942140C05F000940DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75945932140C05F000940DE /* AppDelegate.swift */; };
-		F75945962140C05F000940DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75945952140C05F000940DE /* ViewController.swift */; };
 		F75945992140C05F000940DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F75945972140C05F000940DE /* Main.storyboard */; };
 		F759459B2140C062000940DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F759459A2140C062000940DE /* Assets.xcassets */; };
 		F759459E2140C062000940DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F759459C2140C062000940DE /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		F75945902140C05F000940DE /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75945932140C05F000940DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F75945952140C05F000940DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F75945982140C05F000940DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F759459A2140C062000940DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F759459D2140C062000940DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				F75945932140C05F000940DE /* AppDelegate.swift */,
-				F75945952140C05F000940DE /* ViewController.swift */,
+				05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */,
 				F75945972140C05F000940DE /* Main.storyboard */,
 				F759459A2140C062000940DE /* Assets.xcassets */,
 				F759459C2140C062000940DE /* LaunchScreen.storyboard */,
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F75945962140C05F000940DE /* ViewController.swift in Sources */,
+				05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */,
 				F75945942140C05F000940DE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +283,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFM7FXSN9E;
 				INFOPLIST_FILE = Flix/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kaio.Flix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -298,7 +301,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RFM7FXSN9E;
 				INFOPLIST_FILE = Flix/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kaio.Flix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
