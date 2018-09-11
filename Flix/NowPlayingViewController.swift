@@ -137,12 +137,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         // Use a Dark blue color when the user selects the cell
         let backgroundView = UIView()
-        backgroundView.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        backgroundView.backgroundColor = #colorLiteral(red: 0.4699950814, green: 0.6678406, blue: 0.8381099105, alpha: 1)
         cell.selectedBackgroundView = backgroundView
         
 
         //this code changes color of all cells
-        //cell.contentView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        cell.contentView.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1)
         
         cell.titleLabel.text = movies[indexPath.row]["title"] as? String
         cell.overviewLabel.text = movies[indexPath.row]["overview"] as? String
@@ -155,17 +155,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
         let largePosterURL = URL(string: largeImageURLString + posterPathString)!
-        let placeholderImage = UIImage(named: "image of " + cell.titleLabel.text!)
+        let placeholderImage = UIImage(named: "poster-placeholder")
         
-        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-            size: cell.posterImageView.frame.size,
-            radius: 10.0
-        )
-        
+        /*
         cell.posterImageView.af_setImage(
-            withURL: smallPosterURL,
-            placeholderImage: placeholderImage,
-            filter: filter
+            withURL: largePosterURL,
+            placeholderImage: placeholderImage
         )
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // change 2 to desired number of seconds
@@ -176,8 +171,43 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
                 imageTransition: .crossDissolve(1)
             )
         }
+        */
+        
+        setSmallResolutionImage(cell.posterImageView, smallPosterURL, placeholderImage!){ success in
+            // Your code with delay
+            
+            if success {
+                cell.posterImageView.af_setImage(
+                    withURL: largePosterURL,
+                    placeholderImage: placeholderImage,
+                    imageTransition: .crossDissolve(2)
+                )
+                print("Large Image loaded")
+            }
+            else {
+                print("Large poster was not set")
+            }
+            
+        }
+        
         
         return cell
+    }
+    
+    func setSmallResolutionImage(_ cellImage: UIImageView, _ smallPosterURL: URL, _ placeholderImage: UIImage, completion: @escaping ((_ success: Bool)->())) {
+        
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cellImage.frame.size,
+            radius: 30.0
+        )
+        
+        cellImage.af_setImage(
+            withURL: smallPosterURL,
+            placeholderImage: placeholderImage,
+            filter: filter
+        )
+        print("small Image loaded")
+        completion(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

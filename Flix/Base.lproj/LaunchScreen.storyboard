@@ -18,19 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="3gR-Jo-FBq">
-                                <rect key="frame" x="112" y="331" width="150" height="150"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="launch_image" translatesAutoresizingMaskIntoConstraints="NO" id="3gR-Jo-FBq">
+                                <rect key="frame" x="118" y="336.66666666666669" width="138" height="139"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLm-Rk-Qqj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLm-Rk-Qqj">
                                 <rect key="frame" x="138" y="217" width="98" height="89"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="75"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3gR-Jo-FBq" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="12o-go-CEy"/>
+                            <constraint firstItem="3gR-Jo-FBq" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="9PP-my-Gou"/>
+                            <constraint firstItem="3gR-Jo-FBq" firstAttribute="top" secondItem="aLm-Rk-Qqj" secondAttribute="bottom" constant="30.666666666666686" id="lnt-r9-9r8"/>
+                            <constraint firstItem="aLm-Rk-Qqj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="rXV-jE-3Qb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

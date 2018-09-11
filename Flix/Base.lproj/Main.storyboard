@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C8C-w3-E8q">
-                                <rect key="frame" x="0.0" y="91" width="375" height="687"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="686"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="200" id="OX2-Ga-qrc" customClass="MovieViewCell" customModule="Flix" customModuleProvider="target">
@@ -79,21 +79,22 @@
                                 <color key="color" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="lrl-zy-02r">
-                                <rect key="frame" x="0.0" y="35" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="36" width="375" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="ShG-dH-qqo"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bpS-Vu-Zkc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="309-N7-PiX"/>
                             <constraint firstItem="lrl-zy-02r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6t8-fr-FpA"/>
                             <constraint firstItem="C8C-w3-E8q" firstAttribute="top" secondItem="lrl-zy-02r" secondAttribute="bottom" id="JwF-Ru-T2l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C8C-w3-E8q" secondAttribute="trailing" id="Y8m-U0-yDG"/>
                             <constraint firstItem="C8C-w3-E8q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aAv-4Z-yqx"/>
-                            <constraint firstItem="lrl-zy-02r" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="35" id="apI-tZ-KNd"/>
+                            <constraint firstItem="lrl-zy-02r" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="36" id="apI-tZ-KNd"/>
                             <constraint firstItem="bpS-Vu-Zkc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rbl-py-MI5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C8C-w3-E8q" secondAttribute="bottom" id="tnU-nE-OrB"/>
                             <constraint firstItem="lrl-zy-02r" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uGf-AC-7XC"/>
