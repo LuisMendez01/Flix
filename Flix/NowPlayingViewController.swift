@@ -19,6 +19,10 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     var searchedMovies = [[String: Any]]()//contains all movies from API call
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: 900 * 1024 * 1024,
+        preferredMemoryUsageAfterPurge: 600 * 1024 * 1024)//
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,7 +55,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     func fetchNowPlayingMovies() {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: 10)
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         //session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -157,57 +161,34 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         let largePosterURL = URL(string: largeImageURLString + posterPathString)!
         let placeholderImage = UIImage(named: "poster-placeholder")
         
-        /*
-        cell.posterImageView.af_setImage(
-            withURL: largePosterURL,
-            placeholderImage: placeholderImage
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cell.posterImageView.frame.size,
+            radius: 15.0
+        )
+ 
+        UIImageView.af_sharedImageDownloader = ImageDownloader(
+            configuration: ImageDownloader.defaultURLSessionConfiguration(),
+            downloadPrioritization: .fifo,
+            maximumActiveDownloads: 2,
+            imageCache:imageCache
         )
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // change 2 to desired number of seconds
-            // Your code with delay
-            cell.posterImageView.af_setImage(
-                withURL: largePosterURL,
-                placeholderImage: placeholderImage,
-                imageTransition: .crossDissolve(1)
-            )
-        }
-        */
-        
-        setSmallResolutionImage(cell.posterImageView, smallPosterURL, placeholderImage!){ success in
-            // Your code with delay
-            
-            if success {
+        //caches and loads images
+        cell.posterImageView.af_setImage(
+            withURL: smallPosterURL,
+            placeholderImage: placeholderImage,
+            filter: filter,
+            completion: { (nothing) in
+                
                 cell.posterImageView.af_setImage(
                     withURL: largePosterURL,
-                    placeholderImage: placeholderImage,
-                    imageTransition: .crossDissolve(2)
-                )
-                print("Large Image loaded")
-            }
-            else {
-                print("Large poster was not set")
-            }
-            
-        }
+                    imageTransition: .crossDissolve(3),
+                    runImageTransitionIfCached: false,
+                    completion: (nil)
+                )})
         
         
         return cell
-    }
-    
-    func setSmallResolutionImage(_ cellImage: UIImageView, _ smallPosterURL: URL, _ placeholderImage: UIImage, completion: @escaping ((_ success: Bool)->())) {
-        
-        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-            size: cellImage.frame.size,
-            radius: 30.0
-        )
-        
-        cellImage.af_setImage(
-            withURL: smallPosterURL,
-            placeholderImage: placeholderImage,
-            filter: filter
-        )
-        print("small Image loaded")
-        completion(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
