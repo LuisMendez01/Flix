@@ -20,8 +20,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
     let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 900 * 1024 * 1024,
-        preferredMemoryUsageAfterPurge: 600 * 1024 * 1024)//
+        memoryCapacity: 500 * 1024 * 1024,//500 MB whole container
+        preferredMemoryUsageAfterPurge: 200 * 1024 * 1024)//150MB when replacing what already there
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +169,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         UIImageView.af_sharedImageDownloader = ImageDownloader(
             configuration: ImageDownloader.defaultURLSessionConfiguration(),
             downloadPrioritization: .fifo,
-            maximumActiveDownloads: 2,
+            maximumActiveDownloads: 10,
             imageCache:imageCache
         )
         
