@@ -220,5 +220,10 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         tableView.reloadData()
     }
+    
+    //when tap anywhere keyboard hides
+    @IBAction func onTap(_ sender: Any) {
+        view.endEditing(true)
+    }
 
 }
