@@ -51,7 +51,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     func fetchNowPlayingMovies() {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         //session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -132,14 +132,50 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieViewCell
         
+        // No color when the user selects cell
+        //cell.selectionStyle = .none
+        
+        // Use a Dark blue color when the user selects the cell
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+        cell.selectedBackgroundView = backgroundView
+        
+
+        //this code changes color of all cells
+        //cell.contentView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        
         cell.titleLabel.text = movies[indexPath.row]["title"] as? String
         cell.overviewLabel.text = movies[indexPath.row]["overview"] as? String
         
         let posterPathString = movies[indexPath.row]["poster_path"] as! String
-        let baseURLString = "https://image.tmdb.org/t/p/w500"
+        //let baseURLString = "https://image.tmdb.org/t/p/w500"
         
-        let posterURL = URL(string: baseURLString + posterPathString)!
-        cell.posterImageView.af_setImage(withURL: posterURL)
+        let smallImageURLString = "https://image.tmdb.org/t/p/w45"
+        let largeImageURLString = "https://image.tmdb.org/t/p/original"
+        
+        let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
+        let largePosterURL = URL(string: largeImageURLString + posterPathString)!
+        let placeholderImage = UIImage(named: "image of " + cell.titleLabel.text!)
+        
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cell.posterImageView.frame.size,
+            radius: 10.0
+        )
+        
+        cell.posterImageView.af_setImage(
+            withURL: smallPosterURL,
+            placeholderImage: placeholderImage,
+            filter: filter
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // change 2 to desired number of seconds
+            // Your code with delay
+            cell.posterImageView.af_setImage(
+                withURL: largePosterURL,
+                placeholderImage: placeholderImage,
+                imageTransition: .crossDissolve(1)
+            )
+        }
         
         return cell
     }
