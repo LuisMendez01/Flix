@@ -14,6 +14,7 @@
 		F75945992140C05F000940DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F75945972140C05F000940DE /* Main.storyboard */; };
 		F759459B2140C062000940DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F759459A2140C062000940DE /* Assets.xcassets */; };
 		F759459E2140C062000940DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F759459C2140C062000940DE /* LaunchScreen.storyboard */; };
+		F76BC21121486F3C004F70B3 /* PosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76BC21021486F3C004F70B3 /* PosterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F759459A2140C062000940DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F759459D2140C062000940DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F759459F2140C062000940DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F76BC21021486F3C004F70B3 /* PosterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			children = (
 				F75945932140C05F000940DE /* AppDelegate.swift */,
 				05F3ADB42146FD2800CC8BD6 /* MovieViewCell.swift */,
+				F76BC21021486F3C004F70B3 /* PosterViewController.swift */,
 				05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */,
 				F75945972140C05F000940DE /* Main.storyboard */,
 				F759459A2140C062000940DE /* Assets.xcassets */,
@@ -165,16 +168,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Flix/Pods-Flix-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
@@ -189,15 +188,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Flix-checkManifestLockResult.txt",
 			);
@@ -214,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */,
+				F76BC21121486F3C004F70B3 /* PosterViewController.swift in Sources */,
 				F75945942140C05F000940DE /* AppDelegate.swift in Sources */,
 				05F3ADB52146FD2800CC8BD6 /* MovieViewCell.swift in Sources */,
 			);

@@ -9,7 +9,10 @@
 import UIKit
 import AlamofireImage
 
-class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+var myIndex = 0
+var movie: [[String: Any]] = []//to be used in PosterViewController
+
+class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -19,15 +22,17 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     var searchedMovies = [[String: Any]]()//contains all movies from API call
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
-    let imageCache = AutoPurgingImageCache(
-        memoryCapacity: 500 * 1024 * 1024,//500 MB whole container
-        preferredMemoryUsageAfterPurge: 200 * 1024 * 1024)//150MB when replacing what already there
-    
+    /*******************************************
+     * UIVIEW CONTROLLER LIFECYCLES FUNCTIONS *
+     *******************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self//for didSelectRowAt func tableView to work
+        
         searchBar.delegate = self
+        
         tableView.rowHeight = 200
         
         //first responder
@@ -52,6 +57,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         // Dispose of any resources that can be recreated.
     }
     
+    /************************
+     * MY CREATED FUNCTIONS *
+     ************************/
     func fetchNowPlayingMovies() {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
@@ -128,6 +136,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
          */
     }
     
+    /***********************
+     * TableView functions *
+     ***********************/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
@@ -152,43 +163,36 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         cell.overviewLabel.text = movies[indexPath.row]["overview"] as? String
         
         let posterPathString = movies[indexPath.row]["poster_path"] as! String
-        //let baseURLString = "https://image.tmdb.org/t/p/w500"
         
-        let smallImageURLString = "https://image.tmdb.org/t/p/w45"
-        let largeImageURLString = "https://image.tmdb.org/t/p/original"
+        let baseURLString = "https://image.tmdb.org/t/p/w500"
         
-        let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
-        let largePosterURL = URL(string: largeImageURLString + posterPathString)!
+        let posterURL = URL(string: baseURLString + posterPathString)!
         let placeholderImage = UIImage(named: "poster-placeholder")
         
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: cell.posterImageView.frame.size,
-            radius: 15.0
-        )
- 
-        UIImageView.af_sharedImageDownloader = ImageDownloader(
-            configuration: ImageDownloader.defaultURLSessionConfiguration(),
-            downloadPrioritization: .fifo,
-            maximumActiveDownloads: 10,
-            imageCache:imageCache
+            radius: 5.0
         )
         
-        //caches and loads images
         cell.posterImageView.af_setImage(
-            withURL: smallPosterURL,
+            withURL: posterURL,
             placeholderImage: placeholderImage,
             filter: filter,
-            completion: { (nothing) in
-                
-                cell.posterImageView.af_setImage(
-                    withURL: largePosterURL,
-                    imageTransition: .crossDissolve(3),
-                    runImageTransitionIfCached: false,
-                    completion: (nil)
-                )})
-        
+            imageTransition: .crossDissolve(1),
+            runImageTransitionIfCached: false,
+            completion: (nil))
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        
+        myIndex = indexPath.row
+        movie = movies
+        print("Cell index I clicked is \(myIndex)")
+        
+        performSegue(withIdentifier: "segue", sender: self)
+        //performSegue(withIdentifier: "segue", sender: nil)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -201,10 +205,5 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         tableView.reloadData()
     }
-    
-    //when tap anywhere keyboard hides
-    @IBAction func onTap(_ sender: Any) {
-        view.endEditing(true)
-    }
-
+ 
 }
