@@ -107,7 +107,6 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
-        self.activityIndicator.startAnimating()//start the indicator before reloading data
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
             // Your code with delay
@@ -123,6 +122,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
          let TryAgainAction = UIAlertAction(title: "Try Again", style: .default) { (action) in
             // handle response here.
             alertController.dismiss(animated: true, completion: nil)
+            self.activityIndicator.startAnimating()//start the indicator before reloading data
             self.fetchNowPlayingMovies()//get now playing movies from the APIs
          }
          // add the Try Again action to the alert controller
@@ -180,7 +180,8 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
             filter: filter,
             imageTransition: .crossDissolve(1),
             runImageTransitionIfCached: false,
-            completion: (nil))
+            completion: (nil)
+        )
         
         return cell
     }
