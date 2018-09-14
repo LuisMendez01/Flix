@@ -192,7 +192,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         movie = movies
         print("Cell index I clicked is \(myIndex)")
         
-        performSegue(withIdentifier: "segue", sender: self)
+        //performSegue(withIdentifier: "segue", sender: self)
         //performSegue(withIdentifier: "segue", sender: nil)
     }
     
@@ -205,6 +205,18 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
             //movies = searchedMovies.filter { $0 == searchBar.text} //by whole words but who would do that lol
         
         tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // Get the index path from the cell that was tapped
+        let indexPath = tableView.indexPathForSelectedRow
+        // Get the Row of the Index Path and set as index
+        let index = indexPath?.row
+        // Get in touch with the DetailViewController
+        let detailViewController = segue.destination as! DetailViewController
+        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+        detailViewController.movie = movies[index!]
     }
  
 }
