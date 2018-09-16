@@ -9,8 +9,7 @@
 import UIKit
 import AlamofireImage
 
-var myIndex = 0
-var movie: [[String: Any]] = []//to be used in PosterViewController
+var globalMovies: [[String: Any]] = []//to be used in SuperheroViewController
 
 class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -55,6 +54,12 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        globalMovies = movies
     }
     
     /************************
@@ -186,15 +191,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        
-        myIndex = indexPath.row
-        movie = movies
-        print("Cell index I clicked is \(myIndex)")
-        
-        //performSegue(withIdentifier: "segue", sender: self)
-        //performSegue(withIdentifier: "segue", sender: nil)
-    }
+
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
