@@ -48,6 +48,21 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
             // Your code with delay
             self.fetchNowPlayingMovies()//get now playing movies from the APIs
         }
+        
+        /*********Title In Nav Bar*******/
+        let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+            .strokeColor : UIColor.white,
+            .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
+            .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
+            .font : UIFont.boldSystemFont(ofSize: 28)
+        ]
+        
+        //self.navigationItem.title = "TitleBar"//changes the name on the title navBar, it's hardcoded now on storyBoard
+        
+        //add the attributes to the navbar title
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.titleTextAttributes = strokeTextAttributes
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -59,6 +74,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        //when moving to different viewController right before that set this
         globalMovies = movies
     }
     
@@ -157,7 +173,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // Use a Dark blue color when the user selects the cell
         let backgroundView = UIView()
-        backgroundView.backgroundColor = #colorLiteral(red: 0.4699950814, green: 0.6678406, blue: 0.8381099105, alpha: 1)
+        backgroundView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         cell.selectedBackgroundView = backgroundView
         
 
@@ -215,5 +231,18 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
         detailViewController.movie = movies[index!]
     }
- 
 }
+/* if want to add more options to navbar
+ if let navigationBar = navigationController?.navigationBar {
+ /*
+ //navigationBar.setBackgroundImage(UIImage(named: "codepath-logo"), for: .default)
+ //navigationBar.tintColor = UIColor(red: 1.0, green: 0.25, blue: 0.25, alpha: 0.8)
+ 
+ let shadow = NSShadow()
+ shadow.shadowColor = UIColor.gray.withAlphaComponent(0.5)
+ shadow.shadowOffset = CGSize(width: 2, height: 2)
+ shadow.shadowBlurRadius = 4 */
+ navigationBar.titleTextAttributes = strokeTextAttributes
+ 
+ }
+ */

@@ -84,7 +84,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="ShG-dH-qqo"/>
                                 </constraints>
-                                <color key="barTintColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT8-UP-y5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2757.5999999999999" y="32.512315270935964"/>
+            <point key="canvasLocation" x="1918" y="771"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="KHb-os-NT9">
@@ -225,8 +225,8 @@
                     <navigationBar key="navigationBar" opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="wLP-Nh-62x">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <color key="barTintColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -242,9 +242,16 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dza-PX-v63" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cZL-sv-mcz">
+                    <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cZL-sv-mcz">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.61568627450980395" green="0.67450980392156867" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="zHJ-MD-jih" kind="relationship" relationship="viewControllers" id="Us4-tA-KrG"/>
@@ -255,7 +262,7 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="35.467980295566505"/>
         </scene>
-        <!--Superhero View Controller-->
+        <!--Movie Posters-->
         <scene sceneID="z9b-7P-LLr">
             <objects>
                 <viewController id="0Ed-ye-xWZ" customClass="SuperheroViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
@@ -265,8 +272,8 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cjU-k2-XLc">
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2.5" id="y5e-bm-DVN">
+                                <color key="backgroundColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="y5e-bm-DVN">
                                     <size key="itemSize" width="185" height="204"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -289,12 +296,12 @@
                                         </view>
                                         <connections>
                                             <outlet property="posterImageView" destination="Ve9-tc-EUS" id="F2N-kV-R5V"/>
+                                            <segue destination="Q3O-rl-aCo" kind="show" id="hOV-da-SAv"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cjU-k2-XLc" firstAttribute="top" secondItem="XBx-T3-qcK" secondAttribute="top" id="37N-FQ-sM6"/>
                             <constraint firstItem="cjU-k2-XLc" firstAttribute="leading" secondItem="XBx-T3-qcK" secondAttribute="leading" id="5WD-Pb-o6t"/>
@@ -303,7 +310,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XBx-T3-qcK"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5FA-KE-ovz"/>
+                    <navigationItem key="navigationItem" title="Movie Posters" id="5FA-KE-ovz"/>
                     <connections>
                         <outlet property="collectionView" destination="cjU-k2-XLc" id="qVw-jk-VcJ"/>
                     </connections>
@@ -321,6 +328,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wog-AR-uk1">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -336,4 +345,7 @@
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="hOV-da-SAv"/>
+    </inferredMetricsTieBreakers>
 </document>

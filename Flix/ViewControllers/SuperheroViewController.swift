@@ -12,31 +12,87 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //let NowPlaying = NowPlayingViewController()
+    let titleLabel = UILabel()//label for title
+    var grid = 0;//keeps track of grid size grid X grid size
+    
+    var refreshControl: UIRefreshControl!//! means better not be null or else crashes
+    
+    /*******************************************
+     * UIVIEW CONTROLLER LIFECYCLES FUNCTIONS *
+     *******************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.dataSource = self
-        /*
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.minimumInteritemSpacing = 8
-        layout.minimumLineSpacing = 8
-        layout.headerReferenceSize = CGSize(width: 0, height: 40)
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        collectionView.collectionViewLayout = layout
-        */
         
-        //layout for movie posters
+        refreshControl = UIRefreshControl()
+        //refreshControl.addTarget(self, action: #selector(NowPlaying.didPullToRefresh(_:)), for: .valueChanged)
+        
+        collectionView.insertSubview(refreshControl, at: 0)//0 means it will show on the top
+        //self.activityIndicator.startAnimating()//start the indicator before reloading data
+        
+        /*********Layout for movies*******/
+        changeGridLayout()//calling poster grid function
+        
+        /*********Title In Nav Bar*******/
+        let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+            .strokeColor : UIColor.white,
+            .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
+            .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
+            .font : UIFont.boldSystemFont(ofSize: 25)
+        ]
+        
+        //self.navigationItem.title = "TitleBar"//changes the name on the title navBar, it's hardcoded now on storyBoard
+        
+        //add the attributes to the navbar title
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.titleTextAttributes = strokeTextAttributes
+        }
+        
+        //change the back button of this nav bar to "Movies" coz title of
+        //this nav bar is "MoviePosters" and it's too long to be a back btn
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Movies", style: .plain, target: nil, action: nil)
+        
+        /***************Create btn for grid**************************/
+        //create a new button
+        let button = UIButton.init(type: .custom)
+        //set image for button
+        button.setImage(UIImage(named: "grid.png"), for: UIControlState.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(SuperheroViewController.changeGridLayout), for: UIControlEvents.touchUpInside)
+        
+        //functions to change color when btn is held and released
+        button.addTarget(self, action: #selector(SuperheroViewController.holdRelease(_:)), for: UIControlEvents.touchUpInside);
+        button.addTarget(self, action: #selector(SuperheroViewController.HoldDown(_:)), for: UIControlEvents.touchDown)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    /************************
+     * My Created functions *
+     ************************/
+    @objc func changeGridLayout(){
+        
+        grid=grid+1;
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         //number of cells for collections in a row
-        let cellsPerLine: CGFloat = 4
+        let cellsPerLine: CGFloat = (CGFloat(grid % 4)+1)
         
         //spaces between cells are always 1 less than the number of cells
         let interItemSpaces = cellsPerLine - 1
         
         //minimumInteritemSpacing it's space between width of posters
-        layout.minimumInteritemSpacing = 2.5
+        //layout.minimumInteritemSpacing = 2.5 It's taking it from storyboard
+        //layout.minimumLineSpacing = 2.5 It's taking it from storyboard
         
         //the width of each poster, whole collection width minus the product
         //of the minimum space between cells times the # of cells, divided by cells per row
@@ -45,10 +101,16 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         //the size of each poster item is width and height 2:3 ratio
         layout.itemSize = CGSize(width: width, height: width * (3/2))
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    //target functions for grid button
+    @objc func HoldDown(_ btn:UIButton)
+    {
+        btn.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    }
+    
+    @objc func holdRelease(_ btn:UIButton)
+    {
+        btn.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1)
     }
     
     /****************************
@@ -62,13 +124,87 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "posterCell", for: indexPath) as! PosterViewCell
         
         let posterPathString = globalMovies[indexPath.item]["poster_path"] as! String
-        let baseURLString = "https://image.tmdb.org/t/p/w500"
-        
-        let url = URL(string: baseURLString + posterPathString)!
-        
-        cell.posterImageView.af_setImage(withURL: url)
+        let smallImageURLString = "https://image.tmdb.org/t/p/w45"
+        let largeImageURLString = "https://image.tmdb.org/t/p/original"
+         
+        let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
+        let largePosterURL = URL(string: largeImageURLString + posterPathString)!
+         
+        //caches and loads images
+        cell.posterImageView.af_setImage(
+            withURL: smallPosterURL,
+            completion: { (nothing) in
+                print("small")
+                cell.posterImageView.af_setImage(
+                    withURL: largePosterURL,
+                    completion: { (response) in
+                        print("Large")
+                }
+                )
+            }
+        )
         
         return cell
     }
-
+    
+    //connect items to send to DetailViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let cell = sender as! UICollectionViewCell
+        // Get the index path from the cell that was tapped
+        let indexPath = collectionView!.indexPath(for: cell) //tableView.indexPathForSelectedRow
+        // Get the Row of the Index Path and set as index
+        let index = indexPath?.row
+        print("index: \(index!)")
+        // Get in touch with the DetailViewController
+        let detailViewController = segue.destination as! DetailViewController
+        // Pass on the data to the Detail ViewController by setting it's indexPathRow value
+        detailViewController.movie = globalMovies[index!]
+    }
 }
+
+//more layout options to check out
+/*
+ let layout = UICollectionViewFlowLayout()
+ layout.itemSize = CGSize(width: 100, height: 100)
+ layout.minimumInteritemSpacing = 8
+ layout.minimumLineSpacing = 8
+ layout.headerReferenceSize = CGSize(width: 0, height: 40)
+ layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+ collectionView.collectionViewLayout = layout
+ */
+
+//more navigation bar options for buttons
+/*
+ //code to add two buttons to left and right sides of navbar
+ let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(NameController.saveButtonTapped)
+ 
+ //set frame, not sure if this works coz I didn't see any change
+ //saveButton.frame = CGRect(x: 0, y: 0, width: 35, height: 51)
+ 
+ let segmentedControl = UISegmentedControl(items: ["Foo", "Bar"])
+ segmentedControl.sizeToFit()
+ let segmentedButton = UIBarButtonItem(customView: segmentedControl)
+ 
+ let dummyButton = UIBarButtonItem(title: "Dummy", style: .plain, target: nil, action: nil)
+ 
+ navigationItem.rightBarButtonItems = [saveButton, segmentedButton]
+ navigationItem.leftBarButtonItem = dummyButton
+ */
+
+//this sets a button called Grid to right side of navbar
+//navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Grid", style: .plain, target: self, action: #selector(SuperheroViewController.changeGridLayout))
+
+
+/*
+ let imageCache = AutoPurgingImageCache(
+ memoryCapacity: 500 * 1024 * 1024,//500 MB whole cache container
+ preferredMemoryUsageAfterPurge: 200 * 1024 * 1024)//200MB when replacing what already there, when cache is full
+ 
+ UIImageView.af_sharedImageDownloader = ImageDownloader(
+ configuration: ImageDownloader.defaultURLSessionConfiguration(),
+ downloadPrioritization: .fifo,
+ maximumActiveDownloads: 10,
+ imageCache:imageCache
+ )
+ */

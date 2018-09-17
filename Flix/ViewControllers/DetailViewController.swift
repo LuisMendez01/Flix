@@ -23,6 +23,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    let titleLabel = UILabel()//for the title of the page
+    
     var movie: [String: Any]?
     /*******************************************
      * UIVIEW CONTROLLER LIFECYCLES FUNCTIONS *
@@ -44,27 +46,26 @@ class DetailViewController: UIViewController {
             
             let smallPosterURL = URL(string: baseURLString + smallPosterPathString)!
             smallPosterView.af_setImage(withURL: smallPosterURL)
+            
+            /*********Title In Nav Bar*******/
+            //set some attributes for the title of this controller
+            let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+                .strokeColor : UIColor.white,
+                .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
+                .strokeWidth : -1,
+                .font : UIFont.boldSystemFont(ofSize: 25)
+            ]
+            
+            //NSMutableAttributedString(string: "0", attributes: strokeTextAttributes)
+            //set the name and put in the attributes for it
+            let titleText = NSAttributedString(string: "Movie Detail", attributes: strokeTextAttributes)
+            
+            //adding the titleText
+            titleLabel.attributedText = titleText
+            titleLabel.sizeToFit()
+            navigationItem.titleView = titleLabel
         }
         
-        /*
-         let smallImageURLString = "https://image.tmdb.org/t/p/w45"
-         let largeImageURLString = "https://image.tmdb.org/t/p/original"
-         
-         let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
-         let largePosterURL = URL(string: largeImageURLString + posterPathString)!
-        
-         //caches and loads images
-         poster.af_setImage(
-         withURL: smallPosterURL,
-         completion: { (nothing) in
-         print("small")
-         self.poster.af_setImage(
-         withURL: largePosterURL,
-         completion: { (nothing) in
-         print("Large")
-         }
-         )})
-         */
          scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: overviewLabel.bottomAnchor).isActive = true
     }
     
@@ -72,22 +73,4 @@ class DetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
- 
-     /**********************
-     * IBACTION FUNCTIONS *
-     *********************/
- 
-     /*
-     let imageCache = AutoPurgingImageCache(
-     memoryCapacity: 500 * 1024 * 1024,//500 MB whole cache container
-     preferredMemoryUsageAfterPurge: 200 * 1024 * 1024)//200MB when replacing what already there, when cache is full
-     
-     UIImageView.af_sharedImageDownloader = ImageDownloader(
-     configuration: ImageDownloader.defaultURLSessionConfiguration(),
-     downloadPrioritization: .fifo,
-     maximumActiveDownloads: 10,
-     imageCache:imageCache
-     )
-     */
- 
 }
