@@ -38,8 +38,6 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
             
         }
         
-        dismissButton.layer.borderWidth = -1;
-        
         
         let strokeTextAttributes: [NSAttributedString.Key: Any] = [
             .strokeColor : UIColor.white,
