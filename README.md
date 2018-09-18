@@ -95,8 +95,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. I think I can play around more with WKWebView.
-2. I want to be able to edit the font of UIButtons set the foreground color, strokes, etc.
+        1. I think I can play around more with WKWebView.
+        2. I want to be able to edit the font of UIButtons set the foreground color, strokes, etc.
 
 ## Video Walkthrough
 
@@ -112,9 +112,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
-
--WKWebView was a bit challenge, it seems that the load request is somewhat slow.
--TapGestureRecognizer on an UIImage was a bit complicated, because of it my segue was not working.
+        -WKWebView was a bit challenge, it seems that the load request is somewhat slow.
+        -TapGestureRecognizer on an UIImage was a bit complicated, because of it my segue was not working.
 
 ## License
 
