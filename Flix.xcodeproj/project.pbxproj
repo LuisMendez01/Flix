@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05161E5B21504FA9001AC276 /* MovieTrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05161E5A21504FA9001AC276 /* MovieTrailerViewController.swift */; };
 		05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */; };
 		05F3ADB52146FD2800CC8BD6 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADB42146FD2800CC8BD6 /* MovieViewCell.swift */; };
 		05F3ADBD214C4A3400CC8BD6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADBC214C4A3400CC8BD6 /* DetailViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05161E5A21504FA9001AC276 /* MovieTrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerViewController.swift; sourceTree = "<group>"; };
 		05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		05F3ADB42146FD2800CC8BD6 /* MovieViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
 		05F3ADBC214C4A3400CC8BD6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 				05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */,
 				05F3ADBC214C4A3400CC8BD6 /* DetailViewController.swift */,
 				05F3ADC0214DC3E400CC8BD6 /* SuperheroViewController.swift */,
+				05161E5A21504FA9001AC276 /* MovieTrailerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05161E5B21504FA9001AC276 /* MovieTrailerViewController.swift in Sources */,
 				05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */,
 				F75945942140C05F000940DE /* AppDelegate.swift in Sources */,
 				05F3ADC1214DC3E400CC8BD6 /* SuperheroViewController.swift in Sources */,

@@ -67,10 +67,30 @@ class DetailViewController: UIViewController {
         }
         
          scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: overviewLabel.bottomAnchor).isActive = true
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.tapToTrailer(_:)))
+        
+        smallPosterView.isUserInteractionEnabled = true
+        smallPosterView.addGestureRecognizer(imageTap)
+        
+        print("DetailController")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @objc func tapToTrailer(_ sender: UIImage) {
+        print("segue to MovieTrailerController")
+        performSegue(withIdentifier: "trailer", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let movieTrailerViewController = segue.destination as! MovieTrailerViewController
+        
+        movieTrailerViewController.id = (movie!["id"] as? Int)!
+    }
+    
+  
 }

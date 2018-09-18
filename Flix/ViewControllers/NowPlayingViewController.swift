@@ -111,9 +111,12 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
                 // Handle dataDictionary
                 //print(dataDictionary as Any)
                 self.movies = dataDictionary!["results"] as! [[String: Any]]//as! coz we have a key we def a have a value
+                
                 for movie in self.movies {
                     let title = movie["title"] as! String
-                    print(title)
+                    let id = movie["id"] as! Int
+                    print("title: \(title)")
+                    print("id: \(id)")
                 }
                 
                 self.searchedMovies = self.movies
