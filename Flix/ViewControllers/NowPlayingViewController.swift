@@ -9,8 +9,6 @@
 import UIKit
 import AlamofireImage
 
-var globalMovies: [[String: Any]] = []//to be used in SuperheroViewController
-
 class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +48,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         /*********Title In Nav Bar*******/
-        let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
             .strokeColor : UIColor.white,
             .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
             .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
@@ -69,13 +67,6 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        //when moving to different viewController right before that set this
-        globalMovies = movies
     }
     
     /************************

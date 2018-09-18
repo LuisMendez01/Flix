@@ -11,10 +11,14 @@ import UIKit
 class SuperheroViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //let NowPlaying = NowPlayingViewController()
     let titleLabel = UILabel()//label for title
     var grid = 0;//keeps track of grid size grid X grid size
+    
+    var movies: [[String: Any]] = []//contains all or filter movies with searchBar
+    var searchedMovies = [[String: Any]]()//contains all movies from API call
     
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
@@ -27,16 +31,15 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         collectionView.dataSource = self
         
         refreshControl = UIRefreshControl()
-        //refreshControl.addTarget(self, action: #selector(NowPlaying.didPullToRefresh(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
         
         collectionView.insertSubview(refreshControl, at: 0)//0 means it will show on the top
-        //self.activityIndicator.startAnimating()//start the indicator before reloading data
         
         /*********Layout for movies*******/
         changeGridLayout()//calling poster grid function
         
         /*********Title In Nav Bar*******/
-        let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
             .strokeColor : UIColor.white,
             .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
             .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
@@ -58,17 +61,21 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         //create a new button
         let button = UIButton.init(type: .custom)
         //set image for button
-        button.setImage(UIImage(named: "grid.png"), for: UIControlState.normal)
+        button.setImage(UIImage(named: "grid.png"), for: UIControl.State.normal)
         //add function for button
-        button.addTarget(self, action: #selector(SuperheroViewController.changeGridLayout), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(SuperheroViewController.changeGridLayout), for: UIControl.Event.touchUpInside)
         
         //functions to change color when btn is held and released
-        button.addTarget(self, action: #selector(SuperheroViewController.holdRelease(_:)), for: UIControlEvents.touchUpInside);
-        button.addTarget(self, action: #selector(SuperheroViewController.HoldDown(_:)), for: UIControlEvents.touchDown)
+        button.addTarget(self, action: #selector(SuperheroViewController.holdRelease(_:)), for: UIControl.Event.touchUpInside);
+        button.addTarget(self, action: #selector(SuperheroViewController.HoldDown(_:)), for: UIControl.Event.touchDown)
         
         let barButton = UIBarButtonItem(customView: button)
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
+        
+        /********Fetching SuperHero Posters **********/
+        self.activityIndicator.startAnimating()//start the indicator before reloading data
+        self.fetchSuperheroMovies()//get now playing movies from the APIs
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,13 +124,13 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
      * CollectionView functions *
      ****************************/
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return globalMovies.count
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "posterCell", for: indexPath) as! PosterViewCell
         
-        let posterPathString = globalMovies[indexPath.item]["poster_path"] as! String
+        let posterPathString = movies[indexPath.item]["poster_path"] as! String
         let smallImageURLString = "https://image.tmdb.org/t/p/w45"
         let largeImageURLString = "https://image.tmdb.org/t/p/original"
          
@@ -147,6 +154,87 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         return cell
     }
     
+    /************************
+     * MY CREATED FUNCTIONS *
+     ************************/
+    func fetchSuperheroMovies() {
+        
+        let url = URL(string: "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+                    // Your code with delay
+                    self.offLineAlert()//show alert
+                }
+                
+            } else if let response = response as? HTTPURLResponse,
+                response.statusCode == 200, let data = data {
+                
+                var dataDictionary: [String: Any]?
+                do {
+                    dataDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    //as? [String: Any] means it's ["result": array of dictionaries/moviesINfo]
+                } catch let parseError {
+                    
+                    print(parseError.localizedDescription)
+                    return
+                }
+                // Handle dataDictionary
+                //print(dataDictionary as Any)
+                self.movies = dataDictionary!["results"] as! [[String: Any]]//as! coz we have a key we def a have a value
+                
+                for movie in self.movies {
+                    let title = movie["title"] as! String
+                    let id = movie["id"] as! Int
+                    print("title: \(title)")
+                    print("id: \(id)")
+                }
+                
+                self.searchedMovies = self.movies
+                
+                self.collectionView.reloadData()//reload table after all movies are input in movies array
+                self.refreshControl.endRefreshing()//stop refresh when data has been acquired
+                self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
+            }
+        }
+        task.resume()
+        
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+            // Your code with delay
+            self.fetchSuperheroMovies()//get now playing movies from the APIs
+        }
+    }
+    
+    func offLineAlert() {
+        
+        let alertController = UIAlertController(title: "Can't Fetch Movies", message: "Internet connection appears to be offline", preferredStyle: .alert)
+        
+        // create an TryAgainAction action
+        let TryAgainAction = UIAlertAction(title: "Try Again", style: .default) { (action) in
+            // handle response here.
+            alertController.dismiss(animated: true, completion: nil)
+            self.activityIndicator.startAnimating()//start the indicator before reloading data
+            self.fetchSuperheroMovies()//get now playing movies from the APIs
+        }
+        // add the Try Again action to the alert controller
+        alertController.addAction(TryAgainAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        /*
+         self.present(alertController, animated: true) {
+         // optional code for what happens after the alert controller has finished presenting
+         }
+         */
+    }
+    
     //connect items to send to DetailViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -159,7 +247,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         // Get in touch with the DetailViewController
         let detailViewController = segue.destination as! DetailViewController
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
-        detailViewController.movie = globalMovies[index!]
+        detailViewController.movie = movies[index!]
     }
 }
 

@@ -49,7 +49,7 @@ class DetailViewController: UIViewController {
             
             /*********Title In Nav Bar*******/
             //set some attributes for the title of this controller
-            let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+            let strokeTextAttributes: [NSAttributedString.Key: Any] = [
                 .strokeColor : UIColor.white,
                 .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
                 .strokeWidth : -1,
