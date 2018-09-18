@@ -40,26 +40,24 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
         
         dismissButton.layer.borderWidth = -1;
         
-        /*
-        let strokeTextAttributes: [NSAttributedStringKey: Any] = [
+        
+        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
             .strokeColor : UIColor.white,
             .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
             .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
-            .font : UIFont.boldSystemFont(ofSize: 25)
+            .font : UIFont.boldSystemFont(ofSize: 27)
         ]
         
-        // .Selected
-        let mySelectedAttributedTitle = NSAttributedString(string: "Click Here",
-            attributes: [NSAttributedStringKey.foregroundColor : UIColor.green])
+        let mySelectedAttributedTitle = NSAttributedString(string: "DISMISS", attributes: strokeTextAttributes)
         
-        dismissButton.setAttributedTitle(mySelectedAttributedTitle, for: .selected)
-        
-        // .Normal
-        let myNormalAttributedTitle = NSAttributedString(string: "Click Here",
-            attributes: [NSAttributedStringKey.foregroundColor : UIColor.red])
- 
-        dismissButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
-*/
+        dismissButton.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
+        /*
+        dismissButton.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        dismissButton.layer.borderWidth = 0.5
+        */
+        dismissButton.layer.cornerRadius = 5
+        dismissButton.layer.masksToBounds = true
+
         // Do any additional setup after loading the view.
     }
 

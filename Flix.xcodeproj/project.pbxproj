@@ -50,6 +50,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		057CED9B2151886800D933C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		05F3ADB8214B008B00CC8BD6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +115,7 @@
 		F75945922140C05F000940DE /* Flix */ = {
 			isa = PBXGroup;
 			children = (
+				057CED9B2151886800D933C9 /* Extensions */,
 				05F3ADB9214B009500CC8BD6 /* Views */,
 				05F3ADB8214B008B00CC8BD6 /* ViewControllers */,
 				F75945932140C05F000940DE /* AppDelegate.swift */,

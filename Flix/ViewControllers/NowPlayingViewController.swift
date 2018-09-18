@@ -201,6 +201,11 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Change the selected background of the view of the selected cell.
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

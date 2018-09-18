@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class SuperheroViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
@@ -63,7 +64,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
      *******************/
     @objc func changeGridLayout(){
         
-        grid=grid+1;
+        grid=grid+1;//could have a grid of 1 ... 4 posters
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         //number of cells for collections in a row
@@ -242,11 +243,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         alertController.addAction(TryAgainAction)
         
         self.present(alertController, animated: true, completion: nil)
-        /*
-         self.present(alertController, animated: true) {
-         // optional code for what happens after the alert controller has finished presenting
-         }
-         */
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -254,8 +250,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         // If we haven't typed anything into the search bar then do not filter the results
         // movies = searchedMovies otherwise/else filter searchedMovies
         movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0["title"] as! String).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
-        
-        //movies = searchedMovies.filter { $0 == searchBar.text} //by whole words but who would do that lol
         
         collectionView.reloadData()
     }
