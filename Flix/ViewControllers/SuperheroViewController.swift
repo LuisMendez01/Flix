@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SuperheroViewController: UIViewController, UICollectionViewDataSource {
+class SuperheroViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var superheroSearchBar: UISearchBar!
     
-    //let NowPlaying = NowPlayingViewController()
     let titleLabel = UILabel()//label for title
     var grid = 0;//keeps track of grid size grid X grid size
     
@@ -29,6 +29,10 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         super.viewDidLoad()
 
         collectionView.dataSource = self
+        superheroSearchBar.delegate = self
+        
+        //first responder
+        superheroSearchBar.becomeFirstResponder()
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
@@ -36,7 +40,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         collectionView.insertSubview(refreshControl, at: 0)//0 means it will show on the top
         
         /*********Layout for movies*******/
-        changeGridLayout()//calling poster grid function
+        changeGridLayout()
         
         /*********Title In Nav Bar*******/
         setTitleNavBar()
@@ -243,6 +247,17 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
          // optional code for what happens after the alert controller has finished presenting
          }
          */
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        // If we haven't typed anything into the search bar then do not filter the results
+        // movies = searchedMovies otherwise/else filter searchedMovies
+        movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0["title"] as! String).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
+        
+        //movies = searchedMovies.filter { $0 == searchBar.text} //by whole words but who would do that lol
+        
+        collectionView.reloadData()
     }
     
     //connect items to send to DetailViewController
