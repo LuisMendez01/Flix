@@ -39,39 +39,10 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         changeGridLayout()//calling poster grid function
         
         /*********Title In Nav Bar*******/
-        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
-            .strokeColor : UIColor.white,
-            .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
-            .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
-            .font : UIFont.boldSystemFont(ofSize: 25)
-        ]
-        
-        //self.navigationItem.title = "TitleBar"//changes the name on the title navBar, it's hardcoded now on storyBoard
-        
-        //add the attributes to the navbar title
-        if let navigationBar = navigationController?.navigationBar {
-            navigationBar.titleTextAttributes = strokeTextAttributes
-        }
-        
-        //change the back button of this nav bar to "Movies" coz title of
-        //this nav bar is "MoviePosters" and it's too long to be a back btn
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Movies", style: .plain, target: nil, action: nil)
+        setTitleNavBar()
         
         /***************Create btn for grid**************************/
-        //create a new button
-        let button = UIButton.init(type: .custom)
-        //set image for button
-        button.setImage(UIImage(named: "grid.png"), for: UIControl.State.normal)
-        //add function for button
-        button.addTarget(self, action: #selector(SuperheroViewController.changeGridLayout), for: UIControl.Event.touchUpInside)
-        
-        //functions to change color when btn is held and released
-        button.addTarget(self, action: #selector(SuperheroViewController.holdRelease(_:)), for: UIControl.Event.touchUpInside);
-        button.addTarget(self, action: #selector(SuperheroViewController.HoldDown(_:)), for: UIControl.Event.touchDown)
-        
-        let barButton = UIBarButtonItem(customView: button)
-        //assign button to navigationbar
-        self.navigationItem.rightBarButtonItem = barButton
+        setGridButton()
         
         /********Fetching SuperHero Posters **********/
         self.activityIndicator.startAnimating()//start the indicator before reloading data
@@ -83,9 +54,9 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    /************************
-     * My Created functions *
-     ************************/
+    /*******************
+     * @OBJC FUNCTIONS *
+     *******************/
     @objc func changeGridLayout(){
         
         grid=grid+1;
@@ -118,6 +89,14 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
     @objc func holdRelease(_ btn:UIButton)
     {
         btn.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1)
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+            // Your code with delay
+            self.fetchSuperheroMovies()//get now playing movies from the APIs
+        }
     }
     
     /****************************
@@ -157,6 +136,45 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
     /************************
      * MY CREATED FUNCTIONS *
      ************************/
+    func setTitleNavBar(){
+        
+        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
+            .strokeColor : UIColor.white,
+            .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
+            .strokeWidth : -1,//negative #s will show u foregroundColor, positive #s won't show it
+            .font : UIFont.boldSystemFont(ofSize: 25)
+        ]
+        
+        //self.navigationItem.title = "TitleBar"//changes the name on the title navBar, it's hardcoded now on storyBoard
+        
+        //add the attributes to the navbar title
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.titleTextAttributes = strokeTextAttributes
+        }
+        
+        //change the back button of this nav bar to "Movies" coz title of
+        //this nav bar is "MoviePosters" and it's too long to be a back btn
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Movies", style: .plain, target: nil, action: nil)
+    }
+    
+    func setGridButton(){
+        
+        //create a new button
+        let button = UIButton.init(type: .custom)
+        //set image for button
+        button.setImage(UIImage(named: "grid.png"), for: UIControl.State.normal)
+        //add function for button
+        button.addTarget(self, action: #selector(SuperheroViewController.changeGridLayout), for: UIControl.Event.touchUpInside)
+        
+        //functions to change color when btn is held and released
+        button.addTarget(self, action: #selector(SuperheroViewController.holdRelease(_:)), for: UIControl.Event.touchUpInside);
+        button.addTarget(self, action: #selector(SuperheroViewController.HoldDown(_:)), for: UIControl.Event.touchDown)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
     func fetchSuperheroMovies() {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
@@ -203,14 +221,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         }
         task.resume()
         
-    }
-    
-    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
-            // Your code with delay
-            self.fetchSuperheroMovies()//get now playing movies from the APIs
-        }
     }
     
     func offLineAlert() {

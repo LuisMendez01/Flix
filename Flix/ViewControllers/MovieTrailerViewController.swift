@@ -16,15 +16,19 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var id: Int = -1
+    var id: Int = -1//value for this is passed from DetailVC
     
+    /*******************************************
+     * UIVIEW CONTROLLER LIFECYCLES FUNCTIONS *
+     *******************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView.navigationDelegate = self
+        webView.navigationDelegate = self//needed to use its functions
         
-        webView.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1)
-        activityIndicator.startAnimating()
+        webView.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1) //white background is default
+        
+        activityIndicator.startAnimating()//indicate loading
         
         fetchMovieTrailer(){ url in
             
@@ -35,6 +39,7 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
         }
         
         dismissButton.layer.borderWidth = -1;
+        
         /*
         let strokeTextAttributes: [NSAttributedStringKey: Any] = [
             .strokeColor : UIColor.white,
@@ -63,10 +68,14 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
         // Dispose of any resources that can be recreated.
     }
     
+    /***********************
+     * WKWebView FUNCTIONS *
+     ***********************/
     func webView(_ webView: WKWebView,
                  didFinish navigation: WKNavigation!) {
+        
         print("loaded")
-        self.activityIndicator.stopAnimating()
+        self.activityIndicator.stopAnimating()//stop indicator when WKWebView has loaded
     }
     
     func webView(_ webView: WKWebView,
@@ -74,8 +83,11 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
         print("WKWebView failed")
     }
     
+    /**********************
+     * @IBOULET FUNCTIONS *
+     **********************/
     @IBAction func dismiss(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)//dismiss this controller
     }
     
     /************************
@@ -93,7 +105,6 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
                     // Your code with delay
                     self.offLineAlert()//show alert
-                    //completion(nil)
                 }
                 
             } else if let response = response as? HTTPURLResponse,
@@ -102,7 +113,6 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
                 var dataDictionary: [String: Any]?
                 do {
                     dataDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                    //as? [String: Any] means it's ["result": array of dictionaries/moviesINfo]
                 } catch let parseError {
                     
                     print(parseError.localizedDescription)
@@ -118,14 +128,12 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
                 completion(url)
                 
                 /*
+                 //traverse all trailers in teasers
                 for video in videos {
                     let key = video["key"] as! String
                     print("title: \(key)")
                 }//traverse all videos
                 */
-             
-                //self.refreshControl.endRefreshing()//stop refresh when data has been acquired
-                //self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
             }
         }
         task.resume()
@@ -141,12 +149,12 @@ class MovieTrailerViewController: UIViewController, WKNavigationDelegate  {
         let TryAgainAction = UIAlertAction(title: "Try Again", style: .default) { (action) in
             // handle response here.
             alertController.dismiss(animated: true, completion: nil)
-            //self.activityIndicator.startAnimating()//start the indicator before reloading data
+            
             self.fetchMovieTrailer(){ url in
                 
                 let request = URLRequest(url: url!)
                 self.webView.load(request)
-            }//get now playing movies from the APIs
+            }//get Superheros movies from the APIs
         }
         // add the Try Again action to the alert controller
         alertController.addAction(TryAgainAction)
