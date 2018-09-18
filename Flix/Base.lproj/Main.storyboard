@@ -216,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT8-UP-y5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918" y="771"/>
+            <point key="canvasLocation" x="1917.5999999999999" y="770.68965517241384"/>
         </scene>
         <!--Movie Trailer View Controller-->
         <scene sceneID="Y3L-Da-YW2">
@@ -227,7 +227,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wxy-Sp-adz">
-                                <rect key="frame" x="0.0" y="44" width="375" height="699"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="684"/>
                                 <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -235,12 +235,12 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ra-Uh-yMn">
-                                <rect key="frame" x="0.0" y="743" width="375" height="35"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.0" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="728" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="jL5-U6-eEl"/>
+                                    <constraint firstAttribute="height" constant="50" id="hT6-Vk-Obq"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="22"/>
                                 <state key="normal" title="DISMISS">
                                     <color key="titleColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -248,13 +248,18 @@
                                     <action selector="dismiss:" destination="2Ng-ju-WDN" eventType="touchUpInside" id="Kcb-vy-tJB"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="S51-Sf-XLW">
+                                <rect key="frame" x="169" y="375" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2Ra-Uh-yMn" firstAttribute="bottom" secondItem="NeE-6k-CPh" secondAttribute="bottom" id="3Ea-yp-10J"/>
                             <constraint firstItem="Wxy-Sp-adz" firstAttribute="leading" secondItem="NeE-6k-CPh" secondAttribute="leading" id="A0o-aQ-vVg"/>
                             <constraint firstItem="Wxy-Sp-adz" firstAttribute="top" secondItem="NeE-6k-CPh" secondAttribute="top" id="H6C-Up-CxM"/>
-                            <constraint firstItem="2Ra-Uh-yMn" firstAttribute="top" secondItem="Wxy-Sp-adz" secondAttribute="bottom" id="Lgo-fr-rx4"/>
+                            <constraint firstItem="2Ra-Uh-yMn" firstAttribute="top" secondItem="Wxy-Sp-adz" secondAttribute="bottom" id="Psg-um-xqf"/>
                             <constraint firstItem="Wxy-Sp-adz" firstAttribute="trailing" secondItem="NeE-6k-CPh" secondAttribute="trailing" id="U1o-FJ-O4h"/>
                             <constraint firstItem="2Ra-Uh-yMn" firstAttribute="leading" secondItem="NeE-6k-CPh" secondAttribute="leading" id="ajR-cr-lc7"/>
                             <constraint firstItem="2Ra-Uh-yMn" firstAttribute="trailing" secondItem="NeE-6k-CPh" secondAttribute="trailing" id="vAL-il-NOh"/>
@@ -262,6 +267,8 @@
                         <viewLayoutGuide key="safeArea" id="NeE-6k-CPh"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="S51-Sf-XLW" id="9DR-F6-f98"/>
+                        <outlet property="dismissButton" destination="2Ra-Uh-yMn" id="eY7-Lq-oJV"/>
                         <outlet property="webView" destination="Wxy-Sp-adz" id="nRy-s2-OKq"/>
                     </connections>
                 </viewController>

@@ -81,6 +81,9 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /************************
+     * MY CREATED FUNCTIONS *
+     ************************/
     @objc func tapToTrailer(_ sender: UIImage) {
         print("segue to MovieTrailerController")
         performSegue(withIdentifier: "trailer", sender: nil)
