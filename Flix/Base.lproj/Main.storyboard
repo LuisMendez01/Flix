@@ -30,13 +30,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oxz-GI-CxZ">
-                                                    <rect key="frame" x="5" y="10" width="120" height="180"/>
+                                                    <rect key="frame" x="8" y="8" width="120" height="183.66666666666666"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="zxX-40-yMe"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ant-Man and the Wasp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMI-x1-ylC">
-                                                    <rect key="frame" x="133" y="10" width="232" height="25"/>
+                                                    <rect key="frame" x="136" y="8" width="225.33333333333337" height="25"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.98106676339999999" blue="0.57369142770000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="67V-zW-oDn"/>
                                                     </constraints>
@@ -45,7 +46,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHf-M3-WnI">
-                                                    <rect key="frame" x="133" y="43" width="217" height="140"/>
+                                                    <rect key="frame" x="136" y="41" width="216" height="140"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <string key="text">As Scott Lang awaits expiration of his term of house detention, Hope van Dyne and Dr. Hank Pym involve him in a scheme to rescue Mrs. van Dyne from the micro-universe into which she has fallen, while two groups of schemers converge on them with intentions of stealing Dr. Pym's inventions.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -53,16 +55,16 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="6ho-wI-1H5"/>
+                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="oxz-GI-CxZ" secondAttribute="top" id="2fS-9d-Gpk"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="8" id="6ho-wI-1H5"/>
                                                 <constraint firstItem="wMI-x1-ylC" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="984-Bt-G96"/>
-                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="5" id="E9h-Ns-1hY"/>
-                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="HVS-wx-kZP"/>
-                                                <constraint firstAttribute="bottom" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="9.6699999999999999" id="L0Q-WH-CFI"/>
+                                                <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="8" id="E9h-Ns-1hY"/>
+                                                <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="wMI-x1-ylC" secondAttribute="leading" id="FWQ-Xo-lPX"/>
+                                                <constraint firstAttribute="bottom" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="8" id="L0Q-WH-CFI"/>
                                                 <constraint firstItem="CHf-M3-WnI" firstAttribute="top" secondItem="wMI-x1-ylC" secondAttribute="bottom" constant="8" id="PCE-pf-G3e"/>
-                                                <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="10" id="dBc-WL-XKq"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CHf-M3-WnI" secondAttribute="bottom" constant="6" id="f6f-zr-ZAO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="CHf-M3-WnI" secondAttribute="trailing" constant="10" id="jCR-tf-lvO"/>
-                                                <constraint firstAttribute="trailing" secondItem="wMI-x1-ylC" secondAttribute="trailing" constant="10" id="sBz-GE-wYH"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="CHf-M3-WnI" secondAttribute="bottom" constant="8" id="f6f-zr-ZAO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="CHf-M3-WnI" secondAttribute="trailing" constant="8" id="jCR-tf-lvO"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wMI-x1-ylC" secondAttribute="trailing" constant="8" id="sBz-GE-wYH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -423,6 +425,6 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hOV-da-SAv"/>
+        <segue reference="b8u-kU-9Xu"/>
     </inferredMetricsTieBreakers>
 </document>
