@@ -30,7 +30,9 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         searchBar.delegate = self
         
-        tableView.rowHeight = 200
+        //tableView.rowHeight = 200
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         
         //first responder
         searchBar.becomeFirstResponder()
