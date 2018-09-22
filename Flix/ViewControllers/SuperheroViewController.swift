@@ -41,7 +41,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         collectionView.insertSubview(refreshControl, at: 0)//0 means it will show on the top
         
         /*********Layout for movies*******/
-        changeGridLayout()
+        //changeGridLayout()
         
         /*********Title In Nav Bar*******/
         setTitleNavBar()
@@ -65,6 +65,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     @objc func changeGridLayout(){
         
         grid=grid+1;//could have a grid of 1 ... 4 posters
+        print("grid: \(grid)")
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
         //number of cells for collections in a row
@@ -125,11 +126,11 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         cell.posterImageView.af_setImage(
             withURL: smallPosterURL,
             completion: { (nothing) in
-                print("small")
+                //print("small")
                 cell.posterImageView.af_setImage(
                     withURL: largePosterURL,
                     completion: { (response) in
-                        print("Large")
+                        //print("Large")
                 }
                 )
             }
@@ -267,6 +268,14 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         let detailViewController = segue.destination as! DetailViewController
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
         detailViewController.movie = movies[index!]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("in ViewDidLauOUt")
+        grid=grid-1
+        changeGridLayout()
+        //collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
