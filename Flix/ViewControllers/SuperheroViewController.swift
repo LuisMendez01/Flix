@@ -16,7 +16,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     @IBOutlet weak var superheroSearchBar: UISearchBar!
     
     let titleLabel = UILabel()//label for title
-    var grid = 0;//keeps track of grid size grid X grid size
+    var grid = 1;//keeps track of grid size grid X grid size
     
     var movies: [[String: Any]] = []//contains all or filter movies with searchBar
     var searchedMovies = [[String: Any]]()//contains all movies from API call
@@ -272,10 +272,8 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("in ViewDidLauOUt")
-        grid=grid-1
+        grid=grid-1//substract one so when function below is called it will add 1 and grid will remain the same
         changeGridLayout()
-        //collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 

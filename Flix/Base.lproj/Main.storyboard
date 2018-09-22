@@ -38,14 +38,12 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ant-Man and the Wasp" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMI-x1-ylC">
                                                     <rect key="frame" x="136" y="7.9999999999999982" width="225.33333333333337" height="25.333333333333329"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.98106676339999999" blue="0.57369142770000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHf-M3-WnI">
                                                     <rect key="frame" x="136" y="41.333333333333329" width="216" height="140.66666666666669"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <string key="text">As Scott Lang awaits expiration of his term of house detention, Hope van Dyne and Dr. Hank Pym involve him in a scheme to rescue Mrs. van Dyne from the micro-universe into which she has fallen, while two groups of schemers converge on them with intentions of stealing Dr. Pym's inventions.</string>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -54,11 +52,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="wMI-x1-ylC" firstAttribute="top" secondItem="oxz-GI-CxZ" secondAttribute="top" id="2fS-9d-Gpk"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="8" id="6Sv-se-Khb"/>
                                                 <constraint firstItem="oxz-GI-CxZ" firstAttribute="top" secondItem="J5j-ZP-Pn4" secondAttribute="top" constant="8" id="6ho-wI-1H5"/>
                                                 <constraint firstItem="wMI-x1-ylC" firstAttribute="leading" secondItem="oxz-GI-CxZ" secondAttribute="trailing" constant="8" id="984-Bt-G96"/>
                                                 <constraint firstItem="oxz-GI-CxZ" firstAttribute="leading" secondItem="J5j-ZP-Pn4" secondAttribute="leading" constant="8" id="E9h-Ns-1hY"/>
                                                 <constraint firstItem="CHf-M3-WnI" firstAttribute="leading" secondItem="wMI-x1-ylC" secondAttribute="leading" id="FWQ-Xo-lPX"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oxz-GI-CxZ" secondAttribute="bottom" constant="8" id="L0Q-WH-CFI"/>
                                                 <constraint firstItem="CHf-M3-WnI" firstAttribute="top" secondItem="wMI-x1-ylC" secondAttribute="bottom" constant="8" id="PCE-pf-G3e"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="CHf-M3-WnI" secondAttribute="bottom" constant="8" id="f6f-zr-ZAO"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="CHf-M3-WnI" secondAttribute="trailing" constant="8" id="jCR-tf-lvO"/>
@@ -143,21 +141,18 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ant-Man and the Wasp" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5l-ZD-CWs">
                                                 <rect key="frame" x="174" y="328" width="192" height="20.333333333333314"/>
-                                                <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
                                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujd-P0-pau">
                                                 <rect key="frame" x="174" y="363.33333333333331" width="104.33333333333331" height="20"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview, This will expand only if there is more text in this label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du0-k2-fCL">
                                                 <rect key="frame" x="16" y="461.33333333333337" width="343" height="40.666666666666686"/>
-                                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -349,13 +344,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="185" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ve9-tc-EUS">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ve9-tc-EUS">
                                                     <rect key="frame" x="0.0" y="0.0" width="185" height="204"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.61568627450000002" green="0.67450980390000004" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Ve9-tc-EUS" firstAttribute="leading" secondItem="Fb3-NK-gWb" secondAttribute="leading" id="25p-ES-k4v"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ve9-tc-EUS" secondAttribute="trailing" id="jJR-iS-PHc"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ve9-tc-EUS" secondAttribute="bottom" id="lQm-Of-tln"/>
+                                            <constraint firstItem="Ve9-tc-EUS" firstAttribute="top" secondItem="Fb3-NK-gWb" secondAttribute="top" id="n51-HR-K32"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="posterImageView" destination="Ve9-tc-EUS" id="F2N-kV-R5V"/>
                                             <segue destination="Q3O-rl-aCo" kind="show" id="hOV-da-SAv"/>
@@ -421,6 +421,6 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hOV-da-SAv"/>
+        <segue reference="b8u-kU-9Xu"/>
     </inferredMetricsTieBreakers>
 </document>
