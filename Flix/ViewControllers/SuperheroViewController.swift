@@ -18,8 +18,8 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     let titleLabel = UILabel()//label for title
     var grid = 1;//keeps track of grid size grid X grid size
     
-    var movies: [[String: Any]] = []//contains all or filter movies with searchBar
-    var searchedMovies = [[String: Any]]()//contains all movies from API call
+    var movies: [Movie] = []//contains all or filter movies with searchBar
+    var searchedMovies: [Movie] = []//contains all movies from API call
     
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
@@ -50,8 +50,8 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         setGridButton()
         
         /********Fetching SuperHero Posters **********/
-        self.activityIndicator.startAnimating()//start the indicator before reloading data
-        self.fetchSuperheroMovies()//get now playing movies from the APIs
+        activityIndicator.startAnimating()//start the indicator before reloading data
+        fetchSuperheroMovies()//get now playing movies from the APIs
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,26 +115,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "posterCell", for: indexPath) as! PosterViewCell
         
-        let posterPathString = movies[indexPath.item]["poster_path"] as! String
-        let smallImageURLString = "https://image.tmdb.org/t/p/w45"
-        let largeImageURLString = "https://image.tmdb.org/t/p/original"
-         
-        let smallPosterURL = URL(string: smallImageURLString + posterPathString)!
-        let largePosterURL = URL(string: largeImageURLString + posterPathString)!
-         
-        //caches and loads images
-        cell.posterImageView.af_setImage(
-            withURL: smallPosterURL,
-            completion: { (nothing) in
-                //print("small")
-                cell.posterImageView.af_setImage(
-                    withURL: largePosterURL,
-                    completion: { (response) in
-                        //print("Large")
-                }
-                )
-            }
-        )
+        cell.movie = movies[indexPath.item]
         
         return cell
     }
@@ -183,49 +164,29 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
     
     func fetchSuperheroMovies() {
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
+        let baseUrl = "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
+        
+        //popular movies link
+        //"https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
+        
+        MovieApiManager().getMovies(urlString: baseUrl) { (movies: [Movie]?, error: Error?) in
+            
+            if let movies = movies {
+                self.movies = movies
+                self.searchedMovies = movies
+                
+                self.collectionView.reloadData()//reload table after all movies are input in movies array
+                self.refreshControl.endRefreshing()//stop refresh when data has been acquired
+                self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
+                
+            } else {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
                     // Your code with delay
                     self.offLineAlert()//show alert
                 }
-                
-            } else if let response = response as? HTTPURLResponse,
-                response.statusCode == 200, let data = data {
-                
-                var dataDictionary: [String: Any]?
-                do {
-                    dataDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                    //as? [String: Any] means it's ["result": array of dictionaries/moviesINfo]
-                } catch let parseError {
-                    
-                    print(parseError.localizedDescription)
-                    return
-                }
-                // Handle dataDictionary
-                //print(dataDictionary as Any)
-                self.movies = dataDictionary!["results"] as! [[String: Any]]//as! coz we have a key we def a have a value
-                
-                for movie in self.movies {
-                    let title = movie["title"] as! String
-                    let id = movie["id"] as! Int
-                    print("title: \(title)")
-                    print("id: \(id)")
-                }
-                
-                self.searchedMovies = self.movies
-                
-                self.collectionView.reloadData()//reload table after all movies are input in movies array
-                self.refreshControl.endRefreshing()//stop refresh when data has been acquired
-                self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
             }
         }
-        task.resume()
         
     }
     
@@ -250,7 +211,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         
         // If we haven't typed anything into the search bar then do not filter the results
         // movies = searchedMovies otherwise/else filter searchedMovies
-        movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0["title"] as! String).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
+        movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0.title).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
         
         collectionView.reloadData()
     }
@@ -269,7 +230,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIS
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
         detailViewController.movie = movies[index!]
     }
-    
+ 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         grid=grid-1//substract one so when function below is called it will add 1 and grid will remain the same

@@ -15,8 +15,8 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var movies: [[String: Any]] = []//contains all or filter movies with searchBar
-    var searchedMovies = [[String: Any]]()//contains all movies from API call
+    var movies: [Movie] = []//contains all or filter movies with searchBar
+    var searchedMovies: [Movie] = []//contains all movies from API call
     var refreshControl: UIRefreshControl!//! means better not be null or else crashes
     
     /*******************************************
@@ -76,50 +76,26 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
      ************************/
     func fetchNowPlayingMovies() {
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        //session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
-                    // Your code with delay
-                    self.offLineAlert()//show alert
-                }
-                
-            } else if let response = response as? HTTPURLResponse,
-                response.statusCode == 200, let data = data {
-                
-                var dataDictionary: [String: Any]?
-                do {
-                    dataDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                    //as? [String: Any] means it's ["result": array of dictionaries/moviesINfo]
-                } catch let parseError {
-                    
-                    print(parseError.localizedDescription)
-                    return
-                }
-                // Handle dataDictionary
-                //print(dataDictionary as Any)
-                self.movies = dataDictionary!["results"] as! [[String: Any]]//as! coz we have a key we def a have a value
-                
-                for movie in self.movies {
-                    let title = movie["title"] as! String
-                    let id = movie["id"] as! Int
-                    print("title: \(title)")
-                    print("id: \(id)")
-                }
-                
+        let baseUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
+        
+        MovieApiManager().getMovies(urlString: baseUrl) { (movies: [Movie]?, error: Error?) in
+            
+            if let movies = movies {
+                self.movies = movies
                 self.searchedMovies = self.movies
                 
                 self.tableView.reloadData()//reload table after all movies are input in movies array
                 self.refreshControl.endRefreshing()//stop refresh when data has been acquired
                 self.activityIndicator.stopAnimating()//stop indicator coz data is acquired
+                
+            } else {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
+                    // Your code with delay
+                    self.offLineAlert()//show alert
+                }
             }
         }
-        task.resume()
 
     }
     
@@ -176,29 +152,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         //this code changes color of all cells
         cell.contentView.backgroundColor = #colorLiteral(red: 0.6156862745, green: 0.6745098039, blue: 0.7490196078, alpha: 1)
         
-        cell.titleLabel.text = movies[indexPath.row]["title"] as? String
-        cell.overviewLabel.text = movies[indexPath.row]["overview"] as? String
-        
-        let posterPathString = movies[indexPath.row]["poster_path"] as! String
-        
-        let baseURLString = "https://image.tmdb.org/t/p/w500"
-        
-        let posterURL = URL(string: baseURLString + posterPathString)!
-        let placeholderImage = UIImage(named: "poster-placeholder")
-        
-        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-            size: cell.posterImageView.frame.size,
-            radius: 5.0
-        )
-        
-        cell.posterImageView.af_setImage(
-            withURL: posterURL,
-            placeholderImage: placeholderImage,
-            filter: filter,
-            imageTransition: .crossDissolve(1),
-            runImageTransitionIfCached: false,
-            completion: (nil)
-        )
+        cell.movie = movies[indexPath.row]
         
         return cell
     }
@@ -214,7 +168,7 @@ class NowPlayingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // If we haven't typed anything into the search bar then do not filter the results
         // movies = searchedMovies otherwise/else filter searchedMovies
-        movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0["title"] as! String).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
+        movies = searchText.isEmpty ? searchedMovies : searchedMovies.filter { ($0.title).lowercased().contains(searchBar.text!.lowercased()) }//letter anywhere
             
             //movies = searchedMovies.filter { $0 == searchBar.text} //by whole words but who would do that lol
         

@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum MovieKeys {
-    static let title = "title"
-    static let backdropPath = "backdrop_path"
-    static let posterPath = "poster_path"
-}
-
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var backDropImageView: UIImageView!
@@ -25,48 +19,46 @@ class DetailViewController: UIViewController {
     
     let titleLabel = UILabel()//for the title of the page
     
-    var movie: [String: Any]?
+    var movie: Movie!
     /*******************************************
      * UIVIEW CONTROLLER LIFECYCLES FUNCTIONS *
      *******************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let movie = movie {
-            movieTitleLabel.text = movie[MovieKeys.title] as? String
-            releaseDateLabel.text = movie["release_date"] as? String
-            overviewLabel.text = movie["overview"] as? String
+        movieTitleLabel.text = movie.title
+        
+        releaseDateLabel.text = movie.release_date
+        overviewLabel.text = movie.overview
+        
+        
+        if movie.posterUrl != nil {
+            smallPosterView.af_setImage(withURL: movie.posterUrl!)
+        }
             
-            let backdropPathString = movie[MovieKeys.backdropPath] as! String
-            let smallPosterPathString = movie[MovieKeys.posterPath] as! String
-            let baseURLString = "https://image.tmdb.org/t/p/w500"
-            
-            let backdropURL = URL(string: baseURLString + backdropPathString)!
-            backDropImageView.af_setImage(withURL: backdropURL)
-            
-            let smallPosterURL = URL(string: baseURLString + smallPosterPathString)!
-            smallPosterView.af_setImage(withURL: smallPosterURL)
-            
-            /*********Title In Nav Bar*******/
-            //set some attributes for the title of this controller
-            let strokeTextAttributes: [NSAttributedString.Key: Any] = [
-                .strokeColor : UIColor.white,
-                .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
+        if movie.posterUrl != nil {
+            backDropImageView.af_setImage(withURL: movie.backPosterUrl!)
+        }
+        
+        /*********Title In Nav Bar*******/
+        //set some attributes for the title of this controller
+        let strokeTextAttributes: [NSAttributedString.Key: Any] = [
+            .strokeColor : UIColor.white,
+            .foregroundColor : UIColor(cgColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),  /*UIColor(red: 0.5, green: 0.25, blue: 0.15, alpha: 0.8)*/
                 .strokeWidth : -1,
                 .font : UIFont.boldSystemFont(ofSize: 25)
             ]
             
-            //NSMutableAttributedString(string: "0", attributes: strokeTextAttributes)
-            //set the name and put in the attributes for it
-            let titleText = NSAttributedString(string: "Movie Detail", attributes: strokeTextAttributes)
+        //NSMutableAttributedString(string: "0", attributes: strokeTextAttributes)
+        //set the name and put in the attributes for it
+        let titleText = NSAttributedString(string: "Movie Detail", attributes: strokeTextAttributes)
             
-            //adding the titleText
-            titleLabel.attributedText = titleText
-            titleLabel.sizeToFit()
-            navigationItem.titleView = titleLabel
-        }
-        
-         scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: overviewLabel.bottomAnchor).isActive = true
+        //adding the titleText
+        titleLabel.attributedText = titleText
+        titleLabel.sizeToFit()
+        navigationItem.titleView = titleLabel
+    
+        scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: overviewLabel.bottomAnchor).isActive = true
         
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.tapToTrailer(_:)))
         
@@ -92,7 +84,7 @@ class DetailViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let movieTrailerViewController = segue.destination as! MovieTrailerViewController
         
-        movieTrailerViewController.id = (movie!["id"] as? Int)!
+        movieTrailerViewController.id = (movie.id)
     }
     
   

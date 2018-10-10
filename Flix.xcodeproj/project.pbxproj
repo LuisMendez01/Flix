@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050C35F6216D00B8000D3F12 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050C35F5216D00B8000D3F12 /* Movie.swift */; };
+		050C35F8216D8818000D3F12 /* MovieApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050C35F7216D8818000D3F12 /* MovieApiManager.swift */; };
 		05161E5B21504FA9001AC276 /* MovieTrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05161E5A21504FA9001AC276 /* MovieTrailerViewController.swift */; };
 		05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */; };
 		05F3ADB52146FD2800CC8BD6 /* MovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3ADB42146FD2800CC8BD6 /* MovieViewCell.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050C35F5216D00B8000D3F12 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		050C35F7216D8818000D3F12 /* MovieApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieApiManager.swift; sourceTree = "<group>"; };
 		05161E5A21504FA9001AC276 /* MovieTrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerViewController.swift; sourceTree = "<group>"; };
 		05F3ADB22146EBC000CC8BD6 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		05F3ADB42146FD2800CC8BD6 /* MovieViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewCell.swift; sourceTree = "<group>"; };
@@ -50,6 +54,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050C35F4216D009C000D3F12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				050C35F5216D00B8000D3F12 /* Movie.swift */,
+				050C35F7216D8818000D3F12 /* MovieApiManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		05F3ADB8214B008B00CC8BD6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 		F75945922140C05F000940DE /* Flix */ = {
 			isa = PBXGroup;
 			children = (
+				050C35F4216D009C000D3F12 /* Models */,
 				05F3ADB9214B009500CC8BD6 /* Views */,
 				05F3ADB8214B008B00CC8BD6 /* ViewControllers */,
 				F75945932140C05F000940DE /* AppDelegate.swift */,
@@ -237,9 +251,11 @@
 				05161E5B21504FA9001AC276 /* MovieTrailerViewController.swift in Sources */,
 				05F3ADB32146EBC000CC8BD6 /* NowPlayingViewController.swift in Sources */,
 				F75945942140C05F000940DE /* AppDelegate.swift in Sources */,
+				050C35F8216D8818000D3F12 /* MovieApiManager.swift in Sources */,
 				05F3ADC1214DC3E400CC8BD6 /* SuperheroViewController.swift in Sources */,
 				05F3ADB52146FD2800CC8BD6 /* MovieViewCell.swift in Sources */,
 				05F3ADBF214DC31300CC8BD6 /* PosterViewCell.swift in Sources */,
+				050C35F6216D00B8000D3F12 /* Movie.swift in Sources */,
 				05F3ADBD214C4A3400CC8BD6 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
