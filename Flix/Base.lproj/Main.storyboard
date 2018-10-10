@@ -315,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="35.467980295566505"/>
         </scene>
-        <!--Superhero Posters-->
+        <!--SuperHero Posters-->
         <scene sceneID="z9b-7P-LLr">
             <objects>
                 <viewController id="0Ed-ye-xWZ" customClass="SuperheroViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
@@ -383,7 +383,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XBx-T3-qcK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Superhero Posters" id="5FA-KE-ovz"/>
+                    <navigationItem key="navigationItem" title="SuperHero Posters" id="5FA-KE-ovz"/>
                     <connections>
                         <outlet property="activityIndicator" destination="jF1-XY-QAS" id="MdW-WD-R50"/>
                         <outlet property="collectionView" destination="cjU-k2-XLc" id="qVw-jk-VcJ"/>
@@ -422,6 +422,6 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b8u-kU-9Xu"/>
+        <segue reference="hOV-da-SAv"/>
     </inferredMetricsTieBreakers>
 </document>
