@@ -226,7 +226,9 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://user-images.githubusercontent.com/16315708/46711662-49d9e480-cc1b-11e8-9c40-4013d3f06a62.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<div style="display: inline-block;">
+<img float="left" width="320" height="600"src='https://user-images.githubusercontent.com/16315708/46711662-49d9e480-cc1b-11e8-9c40-4013d3f06a62.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+</div>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
